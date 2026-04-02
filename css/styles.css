@@ -1,0 +1,343 @@
+/* 🔤 Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* BASE */
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #0a0a0a;
+  color: #ffffff;
+  min-height: 100vh;
+}
+
+/* TIPOGRAFIA */
+h1 {
+  font-size: 28px;
+  font-weight: 600;
+}
+
+h2 {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+p {
+  color: #a1a1a1;
+  font-size: 14px;
+}
+
+/* ========================= */
+/* 🔐 LOGIN / CADASTRO */
+/* ========================= */
+
+.auth-layout {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  height: 100vh;
+}
+
+.auth-left {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #0a0a0a;
+}
+
+.logo-big {
+  width: 600px;
+  max-width: 80%;
+  opacity: 0.9;
+}
+
+.auth-right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #0a0a0a;
+}
+
+.card {
+  width: 100%;
+  max-width: 360px;
+  background: #111;
+  border: 1px solid #222;
+  border-radius: 16px;
+  padding: 30px;
+}
+
+.card {
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.auth-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 500px;
+  margin-bottom: 20px;
+  opacity: 0.9;
+}
+
+.card h1 {
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 13px;
+  color: #777;
+  margin-bottom: 15px;
+}
+
+input {
+  background: #0c0c0c;
+  border: 1px solid #222;
+  padding: 13px;
+  border-radius: 10px;
+  transition: 0.2s;
+}
+
+input:focus {
+  border-color: #fff;
+  box-shadow: 0 0 0 1px #fff;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.card input,
+.card button {
+  width: 100%;
+}
+
+.link {
+  margin-top: 10px;
+  font-size: 13px;
+  color: #888;
+  text-align: center;
+}
+
+.link:hover {
+  color: white;
+}
+
+body.auth {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* CARD */
+.card {
+  background: #111;
+  border: 1px solid #222;
+  border-radius: 16px;
+  padding: 28px;
+  width: 100%;
+  max-width: 380px;
+  transition: 0.2s;
+}
+
+.card:hover {
+  border-color: #333;
+}
+
+/* INPUTS */
+input {
+  width: 100%;
+  background: #0f0f0f;
+  border: 1px solid #222;
+  color: white;
+  padding: 12px;
+  border-radius: 10px;
+  margin-top: 12px;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+input:focus {
+  outline: none;
+  border-color: white;
+}
+
+button {
+  margin-top: 15px;
+  padding: 13px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 10px;
+  background: white;
+  color: black;
+  transition: 0.2s;
+}
+
+button:hover {
+  transform: scale(1.02);
+  opacity: 0.9;
+}
+
+/* LINKS */
+.link {
+  margin-top: 12px;
+  text-align: center;
+  font-size: 13px;
+  color: #888;
+  cursor: pointer;
+}
+
+.link:hover {
+  color: white;
+}
+
+.erro {
+  text-align: center;
+  margin-top: 10px;
+  color: #ff4d4d;
+  font-size: 13px;
+}
+
+/* ========================= */
+/* 🧭 NAVBAR */
+/* ========================= */
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  padding: 18px 40px;
+  border-bottom: 1px solid #222;
+  background: #0a0a0a;
+}
+
+nav a {
+  color: #888;
+  text-decoration: none;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+nav a:hover {
+  color: white;
+}
+
+/* ========================= */
+/* 📊 LAYOUT DASHBOARD */
+/* ========================= */
+
+.container {
+  padding: 30px 40px;
+}
+
+/* GRID */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+/* CARDS DO DASHBOARD */
+.card-dashboard {
+  background: #111;
+  border: 1px solid #222;
+  border-radius: 16px;
+  padding: 20px;
+  transition: 0.2s;
+}
+
+.card-dashboard:hover {
+  border-color: #333;
+}
+
+/* ========================= */
+/* 📋 LISTA DE TAREFAS */
+/* ========================= */
+
+.task {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #0f0f0f;
+  border: 1px solid #222;
+  padding: 12px;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+.task p {
+  color: white;
+}
+
+/* BOTÃO SECUNDÁRIO */
+.btn-secondary {
+  background: transparent;
+  border: 1px solid #333;
+  color: #ccc;
+  padding: 6px 10px;
+  font-size: 12px;
+}
+
+.btn-secondary:hover {
+  border-color: white;
+  color: white;
+}
+
+/* ========================= */
+/* ⏱️ TIMER */
+/* ========================= */
+
+.timer {
+  font-size: 48px;
+  font-weight: 600;
+  text-align: center;
+  margin: 20px 0;
+}
+
+/* ========================= */
+/* 📊 GRÁFICOS */
+/* ========================= */
+
+canvas {
+  margin-top: 20px;
+}
+
+/* ========================= */
+/* 📱 RESPONSIVO */
+/* ========================= */
+
+@media (max-width: 768px) {
+  nav {
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+
+  .container {
+    padding: 20px;
+  }
+
+  .card {
+    max-width: 100%;
+  }
+}

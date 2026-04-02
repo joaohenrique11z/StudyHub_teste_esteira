@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - StudyHub</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body class="auth">
+
+<div class="auth-layout">
+
+  <!-- LADO ESQUERDO (LOGO GRANDE) -->
+  <div class="auth-left">
+    <img src="imgs/lets-study.png" alt="Logo StudyHub" class="logo-big">
+  </div>
+
+  <!-- LADO DIREITO (FORMULÁRIO) -->
+  <div class="auth-right">
+    
+    <div class="card">
+
+      <h1>Login</h1>
+      <p class="subtitle">Bem-vindo de volta! <br> Organize seus estudos com eficiência</p>
+
+      <!-- INPUTS -->
+      <input type="email" id="email" placeholder="Email">
+      <input type="password" id="senha" placeholder="Senha">
+
+      <!-- BOTÃO -->
+      <button onclick="login()">Entrar</button>
+
+      <!-- LINK -->
+      <p class="link" onclick="irCadastro()">Criar conta</p>
+
+      <!-- ERRO -->
+      <p id="erro" class="erro"></p>
+
+    </div>
+
+  </div>
+
+</div>
+
+<script type="module" src="js/auth.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- Navbar -->
+<nav>
+  <a href="dashboard.html">Dashboard</a>
+  <a href="tarefas.html">Tarefas</a>
+  <a href="timer.html">Timer</a>
+  <a href="estatisticas.html">Estatísticas</a>
+  <a href="calendario.html">Calendário</a>
+  <a href="perfil.html">Perfil</a>
+  <a href="sobre.html">Sobre</a>
+</nav>
+
+<!-- Conteúdo -->
+<h1 style="margin:20px;">Meu Hub de Estudos</h1>
+
+<div class="card">
+  <h2>Minhas Tarefas</h2>
+
+  <div id="listaTarefas"></div>
+
+  <button onclick="irNovaTarefa()">+ Nova tarefa</button>
+</div>
+
+
+<script type="module">
+  import { protegerPagina } from './js/guard.js'
+  protegerPagina()
+</script>
+
+<script src="js/main.js"></script>
+
+</body>
+</html>
