@@ -1,14 +1,14 @@
-/* 🔤 Google Font */
+/* 🔤 GOOGLE FONT */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
 
-/* RESET */
+/* ===== RESET ===== */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* BASE */
+/* ===== BASE ===== */
 body {
   font-family: 'Inter', sans-serif;
   background-color: #0a0a0a;
@@ -16,16 +16,9 @@ body {
   min-height: 100vh;
 }
 
-/* TIPOGRAFIA */
-h1 {
-  font-size: 28px;
-  font-weight: 600;
-}
-
-h2 {
-  font-size: 20px;
-  font-weight: 500;
-}
+/* ===== TIPOGRAFIA ===== */
+h1 { font-size: 28px; font-weight: 600; }
+h2 { font-size: 20px; font-weight: 500; }
 
 p {
   color: #a1a1a1;
@@ -33,7 +26,7 @@ p {
 }
 
 /* ========================= */
-/* 🔐 LOGIN / CADASTRO */
+/* 🔐 AUTH (LOGIN/CADASTRO) */
 /* ========================= */
 
 .auth-layout {
@@ -42,11 +35,11 @@ p {
   height: 100vh;
 }
 
-.auth-left {
+.auth-left,
+.auth-right {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #0a0a0a;
 }
 
 .logo-big {
@@ -55,134 +48,70 @@ p {
   opacity: 0.9;
 }
 
-.auth-right {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #0a0a0a;
-}
-
+/* ===== CARD ===== */
 .card {
   width: 100%;
-  max-width: 360px;
-  background: #111;
-  border: 1px solid #222;
-  border-radius: 16px;
-  padding: 30px;
-}
-
-.card {
-  animation: fadeIn 0.4s ease;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.auth-container {
-  display: flex;
-  align-items: center;
-}
-
-.logo {
-  width: 500px;
-  margin-bottom: 20px;
-  opacity: 0.9;
-}
-
-.card h1 {
-  text-align: center;
-  margin-bottom: 5px;
-}
-
-.subtitle {
-  text-align: center;
-  font-size: 13px;
-  color: #777;
-  margin-bottom: 15px;
-}
-
-input {
-  background: #0c0c0c;
-  border: 1px solid #222;
-  padding: 13px;
-  border-radius: 10px;
-  transition: 0.2s;
-}
-
-input:focus {
-  border-color: #fff;
-  box-shadow: 0 0 0 1px #fff;
-}
-
-.card {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.card input,
-.card button {
-  width: 100%;
-}
-
-.link {
-  margin-top: 10px;
-  font-size: 13px;
-  color: #888;
-  text-align: center;
-}
-
-.link:hover {
-  color: white;
-}
-
-body.auth {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* CARD */
-.card {
+  max-width: 380px;
   background: #111;
   border: 1px solid #222;
   border-radius: 16px;
   padding: 28px;
-  width: 100%;
-  max-width: 380px;
-  transition: 0.2s;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  animation: fadeIn 0.4s ease;
 }
 
 .card:hover {
   border-color: #333;
 }
 
-/* INPUTS */
-input {
+/* ===== ANIMAÇÃO ===== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== INPUTS ===== */
+input,
+select,
+textarea {
   width: 100%;
   background: #0f0f0f;
   border: 1px solid #222;
   color: white;
   padding: 12px;
   border-radius: 10px;
-  margin-top: 12px;
   font-size: 14px;
   transition: 0.2s;
 }
 
-input:focus {
+input:focus,
+select:focus,
+textarea:focus {
   outline: none;
   border-color: white;
 }
 
+textarea {
+  resize: none;
+  min-height: 100px;
+  font-family: 'Inter', sans-serif;
+}
+
+/* DATE */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
+/* ===== LABEL ===== */
+label {
+  font-size: 13px;
+  color: #888;
+  margin-bottom: 5px;
+}
+
+/* ===== BUTTON ===== */
 button {
   margin-top: 15px;
   padding: 13px;
@@ -191,6 +120,8 @@ button {
   border-radius: 10px;
   background: white;
   color: black;
+  border: none;
+  cursor: pointer;
   transition: 0.2s;
 }
 
@@ -199,7 +130,19 @@ button:hover {
   opacity: 0.9;
 }
 
-/* LINKS */
+/* SECUNDÁRIO */
+.btn-secondary {
+  background: transparent;
+  border: 1px solid #333;
+  color: #ccc;
+}
+
+.btn-secondary:hover {
+  border-color: white;
+  color: white;
+}
+
+/* ===== LINKS ===== */
 .link {
   margin-top: 12px;
   text-align: center;
@@ -212,6 +155,7 @@ button:hover {
   color: white;
 }
 
+/* ===== ERRO ===== */
 .erro {
   text-align: center;
   margin-top: 10px;
@@ -229,7 +173,6 @@ nav {
   gap: 30px;
   padding: 18px 40px;
   border-bottom: 1px solid #222;
-  background: #0a0a0a;
 }
 
 nav a {
@@ -244,64 +187,168 @@ nav a:hover {
 }
 
 /* ========================= */
-/* 📊 LAYOUT DASHBOARD */
+/* 📊 LAYOUT */
 /* ========================= */
 
 .container {
   padding: 30px 40px;
 }
 
-/* GRID */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
 }
 
-/* CARDS DO DASHBOARD */
-.card-dashboard {
-  background: #111;
-  border: 1px solid #222;
-  border-radius: 16px;
-  padding: 20px;
-  transition: 0.2s;
+/* ========================= */
+/* 📋 FORM */
+/* ========================= */
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
 }
 
-.card-dashboard:hover {
-  border-color: #333;
+.form-card {
+  max-width: 500px;
+  margin: auto;
 }
 
 /* ========================= */
-/* 📋 LISTA DE TAREFAS */
+/* 📋 TASK CARDS (VERSÃO FINAL) */
 /* ========================= */
 
 .task {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   background: #0f0f0f;
   border: 1px solid #222;
-  padding: 12px;
-  border-radius: 10px;
+  border-radius: 14px;
+  padding: 14px;
+  margin-top: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.task:hover {
+  border-color: #333;
+  transform: translateY(-1px);
+}
+
+/* HEADER */
+.task-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+/* CHECKBOX MODERNO */
+.task-checkbox {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #555;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+  margin-top: 3px;
+}
+
+.task-checkbox:hover {
+  border-color: #aaa;
+}
+
+.task-checkbox:checked {
+  background: white;
+  border-color: white;
+}
+
+.task-checkbox:checked::after {
+  content: "✔";
+  font-size: 12px;
+  color: black;
+  position: absolute;
+  left: 2px;
+  top: -1px;
+}
+
+/* INFO */
+.task-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+/* TITLE */
+.task-title {
+  font-size: 15px;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+/* ✔️ tarefa concluída */
+.task.completed .task-title {
+  text-decoration: line-through;
+  color: #777;
+}
+
+/* BADGES */
+.task-badges {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.badge {
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
+/* CATEGORIA */
+.badge-category {
+  background: #1a1a1a;
+  color: #bbb;
+}
+
+/* URGÊNCIA */
+.badge-low {
+  background: rgba(0, 200, 100, 0.12);
+  color: #00c864;
+}
+
+.badge-medium {
+  background: rgba(255, 180, 0, 0.12);
+  color: #ffb400;
+}
+
+.badge-high {
+  background: rgba(255, 60, 60, 0.12);
+  color: #ff3c3c;
+}
+
+/* DETAILS (ANIMAÇÃO SUAVE) */
+.task-details {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: all 0.25s ease;
+}
+
+.task.open .task-details {
+  max-height: 200px;
+  opacity: 1;
   margin-top: 10px;
 }
 
-.task p {
-  color: white;
-}
-
-/* BOTÃO SECUNDÁRIO */
-.btn-secondary {
-  background: transparent;
-  border: 1px solid #333;
-  color: #ccc;
-  padding: 6px 10px;
-  font-size: 12px;
-}
-
-.btn-secondary:hover {
-  border-color: white;
-  color: white;
+/* TEXTO DETALHES */
+.task-details p {
+  font-size: 13px;
+  color: #aaa;
+  margin-bottom: 5px;
 }
 
 /* ========================= */
@@ -339,5 +386,13 @@ canvas {
 
   .card {
     max-width: 100%;
+  }
+
+  .auth-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .auth-left {
+    display: none;
   }
 }

@@ -5,6 +5,12 @@
   <title>Dashboard</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
+
+<script type="module">
+  import { carregarTarefas } from './js/tasks.js'
+  carregarTarefas() // carrega tudo inicialmente
+</script>
+
 <body>
 
 <!-- Navbar -->
@@ -20,6 +26,17 @@
 
 <!-- Conteúdo -->
 <h1 style="margin:20px;">Meu Hub de Estudos</h1>
+
+<div class="card">
+
+  <h2>Filtrar por data</h2>
+
+  <input type="date" id="dataFiltro">
+
+  <button onclick="aplicarFiltro()">Filtrar</button>
+  <button onclick="limparFiltro()" class="btn-secondary">Limpar</button>
+
+</div>
 
 <div class="card">
   <h2>Minhas Tarefas</h2>

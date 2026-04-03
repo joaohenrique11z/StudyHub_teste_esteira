@@ -299,22 +299,7 @@ function carregarPerfil() {
   }
 }
 
-function filtrarPorData() {
-  const data = document.getElementById("dataFiltro").value
-  const resultado = document.getElementById("resultado")
 
-  const sessoes = JSON.parse(localStorage.getItem("sessoes")) || []
-
-  resultado.innerHTML = ""
-
-  sessoes.forEach(s => {
-    if (s.data === new Date(data).toLocaleDateString()) {
-      const p = document.createElement("p")
-      p.innerText = `Tempo: ${formatarTempo(s.tempo)}`
-      resultado.appendChild(p)
-    }
-  })
-}
 
 // RODAR AUTOMÁTICO
 verificarLogin()
@@ -326,4 +311,3 @@ calcularTempoTotal()
 calcularDiaTop()
 calcularMediaDiaria()
 carregarPerfil()
-filtrarPorData()

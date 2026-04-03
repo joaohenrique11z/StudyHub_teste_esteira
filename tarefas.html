@@ -5,11 +5,12 @@
   <title>Tarefas</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
+
 <body>
 
-<nav>
+<nav class="navbar">
   <a href="dashboard.html">Dashboard</a>
-  <a href="tarefas.html">Tarefas</a>
+  <a href="tarefas.html" class="active">Tarefas</a>
   <a href="timer.html">Timer</a>
   <a href="estatisticas.html">Estatísticas</a>
   <a href="calendario.html">Calendário</a>
@@ -17,11 +18,44 @@
   <a href="sobre.html">Sobre</a>
 </nav>
 
-<div class="card">
-  <h2>Lista de Tarefas</h2>
-  <div id="listaTarefas"></div>
-  <button onclick="irNovaTarefa()">+ Nova tarefa</button>
+<div class="container">
+
+  <!-- FILTRO -->
+  <div class="card filter-card">
+
+    <h2>Filtrar por data</h2>
+
+    <div class="filter-row">
+      <input type="date" id="dataFiltro">
+
+      <button onclick="aplicarFiltro()">Filtrar</button>
+      <button onclick="limparFiltro()" class="btn-secondary">Limpar</button>
+    </div>
+
+  </div>
+
+  <!-- LISTA -->
+  <div class="card">
+
+    <div class="card-header">
+      <h2>Lista de Tarefas</h2>
+      <button onclick="irNovaTarefa()" class="btn-primary">
+        + Nova tarefa
+      </button>
+    </div>
+
+    <div id="listaTarefas"></div>
+
+  </div>
+
 </div>
+
+<script type="module" src="js/tasks.js"></script>
+
+<script type="module">
+  import { carregarTarefas } from './js/tasks.js'
+  carregarTarefas()
+</script>
 
 <script src="js/main.js"></script>
 

@@ -5,28 +5,56 @@
   <title>Nova Tarefa</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
+
 <body>
 
 <nav>
   <a href="dashboard.html">Dashboard</a>
-  <a href="tarefas.html">Tarefas</a>
-  <a href="timer.html">Timer</a>
-  <a href="estatisticas.html">Estatísticas</a>
-  <a href="calendario.html">Calendário</a>
-  <a href="perfil.html">Perfil</a>
-  <a href="sobre.html">Sobre</a>
 </nav>
 
-<div class="card">
-  <h2>Nova Tarefa</h2>
+<div class="container">
 
-  <input type="text" id="nome" placeholder="Nome da tarefa">
-  <input type="text" id="categoria" placeholder="Matéria (ex: Matemática)">
+  <div class="card form-card">
 
-  <button onclick="salvarTarefa()">Salvar</button>
+    <h1>Nova Tarefa</h1>
+    <p class="subtitle">Adicione uma nova atividade de estudo</p>
+
+    <div class="form-group">
+      <label>Título</label>
+      <input type="text" id="titulo" placeholder="Ex: Estudar funções">
+    </div>
+
+    <div class="form-group">
+      <label>Matéria</label>
+      <input type="text" id="materia" placeholder="Ex: Matemática">
+    </div>
+
+    <div class="form-group">
+      <label>Categoria</label>
+      <input type="text" id="categoria" placeholder="Ex: Prova, Revisão">
+    </div>
+
+    <div class="form-group">
+      <label>Urgência</label>
+      <select id="urgencia">
+        <option value="baixa">Baixa</option>
+        <option value="media">Média</option>
+        <option value="alta">Alta</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Notas</label>
+      <textarea id="notas" placeholder="Anotações importantes..."></textarea>
+    </div>
+
+    <button onclick="criarTarefa()">Salvar tarefa</button>
+
+  </div>
+
 </div>
 
-<script src="js/main.js"></script>
+<script type="module" src="js/tasks.js"></script>
 
 </body>
 </html>
