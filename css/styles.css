@@ -26,7 +26,7 @@ p {
 }
 
 /* ========================= */
-/* 🔐 AUTH (LOGIN/CADASTRO) */
+/* 🔐 LOGIN / CADASTRO */
 /* ========================= */
 
 .auth-layout {
@@ -35,16 +35,160 @@ p {
   height: 100vh;
 }
 
-.auth-left,
-.auth-right {
+.auth-left {
   display: flex;
   justify-content: center;
   align-items: center;
+  background: #0a0a0a;
 }
 
 .logo-big {
   width: 600px;
   max-width: 80%;
+  opacity: 0.9;
+}
+
+.auth-right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #0a0a0a;
+}
+
+.card-auth {
+  width: 100%;
+  max-width: 360px;
+  background: #111;
+  border: 1px solid #222;
+  border-radius: 16px;
+  padding: 30px;
+}
+
+.card-auth {
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.auth-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 500px;
+  margin-bottom: 20px;
+  opacity: 0.9;
+}
+
+.card-auth h1 {
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 13px;
+  color: #777;
+  margin-bottom: 15px;
+}
+
+input {
+  background: #0c0c0c;
+  border: 1px solid #222;
+  padding: 13px;
+  border-radius: 10px;
+  transition: 0.2s;
+}
+
+input:focus {
+  border-color: #fff;
+  box-shadow: 0 0 0 1px #fff;
+}
+
+.card-auth {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.card-auth input,
+.card-auth button {
+  width: 100%;
+}
+
+.link {
+  margin-top: 10px;
+  font-size: 13px;
+  color: #888;
+  text-align: center;
+}
+
+.link:hover {
+  color: white;
+}
+
+body.auth {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* CARD */
+.card-auth {
+  background: #111;
+  border: 1px solid #222;
+  border-radius: 16px;
+  padding: 28px;
+  width: 100%;
+  max-width: 380px;
+  transition: 0.2s;
+}
+
+.card-auth:hover {
+  border-color: #333;
+}
+
+/* INPUTS */
+input {
+  width: 100%;
+  background: #0f0f0f;
+  border: 1px solid #222;
+  color: white;
+  padding: 12px;
+  border-radius: 10px;
+  margin-top: 12px;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+input:focus {
+  outline: none;
+  border-color: white;
+}
+
+button {
+  margin-top: 15px;
+  padding: 13px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 10px;
+  background: white;
+  color: black;
+  transition: 0.2s;
+}
+
+button:hover {
+  transform: scale(1.02);
   opacity: 0.9;
 }
 
@@ -59,6 +203,7 @@ p {
   flex-direction: column;
   gap: 10px;
   animation: fadeIn 0.4s ease;
+  margin-top:20px;
 }
 
 /* ===== ANIMAÇÃO ===== */
@@ -325,6 +470,20 @@ nav a:hover {
   color: #ff3c3c;
 }
 
+.delete-btn {
+  background: transparent;
+  border: none;
+  color: #666;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.delete-btn:hover {
+  color: #ff4d4d;
+  transform: scale(1.1);
+}
+
 /* DETAILS (ANIMAÇÃO SUAVE) */
 .task-details {
   max-height: 0;
@@ -446,16 +605,6 @@ canvas {
   margin-top:20px;
 }
 
-.motivation-card {
-  background: #1c1c1c;
-  padding: 15px;
-  margin-bottom: 20px;
-  font-size: 15px;
-  text-align: left;
-  font-style: italic;
-  color: #aaa;
-}
-
 /* ===== GRID PRINCIPAL ===== */
 .main-grid {
   display: grid;
@@ -496,6 +645,51 @@ canvas {
 /* BOTÕES */
 .timer-actions {
   display: flex;
+  justify-content: center;
   gap: 10px;
 }
 
+/* ========================= */
+/* 🎯 TASK SELECIONADA */
+/* ========================= */
+
+.task-selected {
+  border: 1px solid #222;
+  padding: 16px;
+  border-radius: 14px;
+  background: #0f0f0f;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* título */
+.task-selected-header h3 {
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* badges */
+.task-selected-badges {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+/* info (matéria) */
+.task-selected-info {
+  text-align: center;
+  font-size: 13px;
+  color: #aaa;
+}
+
+/* descrição */
+.task-selected-notes {
+  text-align: center;
+  font-size: 13px;
+  color: #777;
+  border-top: 1px solid #222;
+  padding-top: 10px;
+}

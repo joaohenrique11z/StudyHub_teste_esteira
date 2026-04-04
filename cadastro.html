@@ -16,15 +16,15 @@
 
   <!-- LADO DIREITO -->
   <div class="auth-right">
-    <div class="card">
+    <div class="card-auth">
 
       <h1>Criar Conta</h1>
       <p class="subtitle">Comece a organizar seus estudos</p>
 
-      <input type="email" placeholder="Email">
-      <input type="password" placeholder="Senha">
+      <input type="email" id="email" placeholder="Email">
+      <input type="password" id="senha" placeholder="Senha">
 
-      <button>Cadastrar</button>
+      <button onclick="cadastrar()">Cadastrar</button>
 
       <!-- LINK -->
       <p class="link" onclick="window.location.href='index.html'">Já tenho conta</p>
@@ -36,5 +36,7 @@
   </div>
 
 </div>
+
+<script type="module" src="js/auth.js"></script>
 
 </body>

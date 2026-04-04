@@ -44,7 +44,7 @@ window.cadastrar = async () => {
     return
   }
 
-  alert("Conta criada! Verifique seu email.")
+  alert("Conta criada!")
   window.location.href = "index.html"
 }
 

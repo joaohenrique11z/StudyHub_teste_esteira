@@ -1,9 +1,25 @@
 import { supabase } from './supabase.js'
 
-// CRIAR TAREFA
+/* ========================= */
+/* 📅 DATA */
+/* ========================= */
+function getHoje() {
+  return new Date().toLocaleDateString("en-CA")
+}
+
+/* ========================= */
+/* 🆕 CRIAR TAREFA */
+/* ========================= */
 window.criarTarefa = async () => {
   const { data: userData } = await supabase.auth.getUser()
   const user = userData.user
+
+  if (!user) {
+    alert("Usuário não autenticado")
+    return
+  }
+
+  const hoje = getHoje()
 
   const tarefa = {
     user_id: user.id,
@@ -12,12 +28,14 @@ window.criarTarefa = async () => {
     category: document.getElementById('categoria').value,
     urgency: document.getElementById('urgencia').value,
     notes: document.getElementById('notas').value,
-    completed: false
+    completed: false,
+    date_local: hoje
   }
 
   const { error } = await supabase.from('tasks').insert([tarefa])
 
   if (error) {
+    console.error(error)
     alert("Erro ao salvar")
     return
   }
@@ -25,7 +43,9 @@ window.criarTarefa = async () => {
   window.location.href = "dashboard.html"
 }
 
-// 🔥 FUNÇÃO PRINCIPAL
+/* ========================= */
+/* 🔥 CARREGAR TAREFAS */
+/* ========================= */
 export async function carregarTarefas(dataSelecionada = null) {
   const container = document.getElementById("listaTarefas")
   if (!container) return
@@ -40,23 +60,15 @@ export async function carregarTarefas(dataSelecionada = null) {
     .eq('user_id', user.id)
     .order('created_at', { ascending: false })
 
-  // 📅 FILTRO POR DATA
+  // ✅ filtro simples (sem timezone)
   if (dataSelecionada) {
-    const inicio = new Date(dataSelecionada)
-    inicio.setHours(0, 0, 0, 0)
-
-    const fim = new Date(dataSelecionada)
-    fim.setHours(23, 59, 59, 999)
-
-    query = query
-      .gte('created_at', inicio.toISOString())
-      .lte('created_at', fim.toISOString())
+    query = query.eq("date_local", dataSelecionada)
   }
 
   const { data: tarefas, error } = await query
 
   if (error) {
-    console.log(error)
+    console.error(error)
     return
   }
 
@@ -67,25 +79,35 @@ export async function carregarTarefas(dataSelecionada = null) {
     div.classList.add('task')
 
     div.innerHTML = `
-    <div class="task-header">
+      <div class="task-header">
+
         <input type="checkbox" class="task-checkbox" ${t.completed ? "checked" : ""}>
+
         <div class="task-info">
-        <span class="task-title">${t.title}</span>
-        <div class="task-badges">
+          <span class="task-title">${t.title}</span>
+
+          <div class="task-badges">
             <span class="badge badge-category">${t.category}</span>
             <span class="badge ${getUrgencyClass(t.urgency)}">${t.urgency}</span>
+          </div>
         </div>
-        </div>
-    </div>
+
+        <button class="delete-btn">🗑️</button>
+
+      </div>
     `
 
     const checkbox = div.querySelector(".task-checkbox")
+    const deleteBtn = div.querySelector(".delete-btn")
 
-    // marcar como concluída visualmente
+    // estado inicial
     if (t.completed) {
       div.classList.add("completed")
     }
 
+    /* ========================= */
+    /* ✅ CHECKBOX */
+    /* ========================= */
     checkbox.addEventListener("click", async (e) => {
       e.stopPropagation()
 
@@ -103,24 +125,55 @@ export async function carregarTarefas(dataSelecionada = null) {
         return
       }
 
-      if (novoStatus) {
-        div.classList.add("completed")
-      } else {
-        div.classList.remove("completed")
-      }
+      div.classList.toggle("completed")
 
-      // 🔥 AVISA O DASHBOARD
       document.dispatchEvent(new Event("tasksUpdated"))
     })
-    
-    // 🔥 CORREÇÃO 1: Faltava renderizar o elemento na tela
-    container.appendChild(div) 
-    
-  }) // 🔥 CORREÇÃO 2: Faltava fechar o forEach
-} // 🔥 CORREÇÃO 3: Faltava fechar a função carregarTarefas
 
+    /* ========================= */
+    /* 🗑️ DELETE */
+    /* ========================= */
+    deleteBtn.addEventListener("click", async (e) => {
+      e.stopPropagation()
 
-// 👉 aplicar filtro
+      const confirmar = confirm("Deseja deletar esta tarefa?")
+      if (!confirmar) return
+
+      const { error } = await supabase
+        .from("tasks")
+        .delete()
+        .eq("id", t.id)
+
+      if (error) {
+        console.error(error)
+        alert("Erro ao deletar tarefa")
+        return
+      }
+
+      // animação
+      div.style.opacity = "0"
+      div.style.transform = "translateX(-10px)"
+
+      setTimeout(() => div.remove(), 200)
+
+      document.dispatchEvent(new Event("tasksUpdated"))
+    })
+
+    /* ========================= */
+    /* 🎯 SELEÇÃO + EXPANSÃO */
+    /* ========================= */
+    div.addEventListener("click", () => {
+      div.classList.toggle('open')
+      selecionarTask(t)
+    })
+
+    container.appendChild(div)
+  })
+}
+
+/* ========================= */
+/* 📅 FILTRO */
+/* ========================= */
 window.aplicarFiltro = () => {
   const input = document.getElementById("dataFiltro")
   if (!input || !input.value) return
@@ -128,32 +181,47 @@ window.aplicarFiltro = () => {
   carregarTarefas(input.value)
 }
 
-// 👉 limpar filtro (mostrar tudo)
 window.limparFiltro = () => {
-  carregarTarefas()
+  carregarTarefas(getHoje())
 }
 
+/* ========================= */
+/* 🎨 BADGE */
+/* ========================= */
 function getUrgencyClass(urgency) {
   if (urgency === "alta") return "badge-high"
   if (urgency === "media") return "badge-medium"
   return "badge-low"
 }
 
+/* ========================= */
+/* 📅 AUTO FILTRO */
+/* ========================= */
 const inputData = document.getElementById("dataFiltro")
 
-// Tratando a possibilidade de null caso a tag não exista na página
 if (inputData) {
   inputData.addEventListener("change", () => {
     aplicarFiltro()
   })
 }
 
+/* ========================= */
+/* 🎯 TASK SELECIONADA */
+/* ========================= */
 export function selecionarTask(task) {
   localStorage.setItem("taskSelecionada", JSON.stringify(task))
 
-  const el = document.getElementById("taskSelecionada")
+  document.getElementById("taskTitulo").innerText = task.title
 
-  if (el) {
-    el.innerText = task.title
-  }
+  // badges
+  document.getElementById("taskBadges").innerHTML = `
+    <span class="badge badge-category">${task.category}</span>
+    <span class="badge ${getUrgencyClass(task.urgency)}">${task.urgency}</span>
+  `
+
+  // info
+  document.getElementById("taskInfo").innerText = `📚 ${task.subject}`
+
+  // notas
+  document.getElementById("taskNotas").innerText = task.notes || ""
 }

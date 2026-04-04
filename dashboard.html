@@ -23,8 +23,6 @@
 
 <div class="container">
 
-  <div class="motivation-card">Not been where you want should be enough motivation</div>
-
   <!-- 🔢 MÉTRICAS -->
   <div class="stats">
 
@@ -49,13 +47,20 @@
     <div class="card tasks-card">
       <h2>Tarefas</h2>
       <div id="listaTarefas"></div>
+      <button onclick="window.location.href='nova-tarefa.html'" class="btn-primary">+</button>
     </div>
 
     <!-- ⏱️ TIMER -->
     <div class="card timer-card">
 
-    <div class="task-selected" id="taskSelecionada">
-      Selecione uma Tarefa
+    <div class="task-selected">
+      <h3 id="taskTitulo">Selecione uma tarefa</h3>
+
+      <div id="taskBadges" class="task-selected-badges"></div>
+
+      <div id="taskInfo" class="task-selected-info"></div>
+
+      <p id="taskNotas" class="task-selected-notes"></p>
     </div>
 
     <div class="timer-display" id="timer">
@@ -73,202 +78,7 @@
 
 </div>
 
-<script type="module">
-  import { supabase } from './js/supabase.js'
-  import { carregarTarefas } from './js/tasks.js'
-  carregarTarefas()
-
-  function pegarHorarioAtual() {
-  const agora = new Date()
-
-  const horas = String(agora.getHours()).padStart(2, '0')
-  const minutos = String(agora.getMinutes()).padStart(2, '0')
-  const segundos = String(agora.getSeconds()).padStart(2, '0')
-
-  return `${horas}:${minutos}:${segundos}`
-  } 
-
-  function atualizarHorario() {
-  const horario = pegarHorarioAtual()
-  document.getElementById("horarioAtual").innerText = horario
-  }
-
-// atualiza a cada segundo
-setInterval(atualizarHorario, 1000)
-
-let tempo = 0
-let intervalo = null
-let rodando = false
-
-function formatarTempo(segundos) {
-  const h = String(Math.floor(segundos / 3600)).padStart(2, "0")
-  const m = String(Math.floor((segundos % 3600) / 60)).padStart(2, "0")
-  const s = String(segundos % 60).padStart(2, "0")
-
-  return `${h}:${m}:${s}`
-}
-
-const btnIniciar = document.getElementById("btnIniciar")
-const display = document.getElementById("timer")
-
-btnIniciar.addEventListener("click", () => {
-  if (!rodando) {
-    intervalo = setInterval(() => {
-      tempo++
-      display.innerText = formatarTempo(tempo)
-    }, 1000)
-
-    rodando = true
-    btnIniciar.innerText = "Pausar"
-  } else {
-    clearInterval(intervalo)
-    rodando = false
-    btnIniciar.innerText = "Continuar"
-  }
-})
-
-const btnSalvar = document.getElementById("btnSalvar")
-
-btnSalvar.addEventListener("click", async () => {
-  const task = JSON.parse(localStorage.getItem("taskSelecionada"))
-
-  if (!task) {
-    alert("Selecione uma tarefa primeiro!")
-    return
-  }
-
-  if (tempo === 0) {
-    alert("Tempo inválido!")
-    return
-  }
-
-  // 🔐 pegar usuário logado
-  const { data: userData, error } = await supabase.auth.getUser()
-
-  if (error || !userData.user) {
-    alert("Usuário não autenticado")
-    return
-  }
-
-  const user = userData.user
-
-  // 💾 salvar no banco
-  const { error: insertError } = await supabase
-    .from("study_sessions")
-    .insert({
-      user_id: user.id,
-      task_id: task.id,
-      subject: task.subject,
-      category: task.category,
-      duration: tempo
-    })
-
-  if (insertError) {
-    console.error(insertError)
-    alert("Erro ao salvar sessão")
-    return
-  }
-
-  alert("Sessão salva com sucesso! Continue focado :)")
-
-  await carregarTempoFoco() // atualizar tempo de foco no dashboard
-
-  // 🔄 RESET TIMER
-  tempo = 0
-  document.getElementById("timer").innerText = "00:00:00"
-})
-
-function carregarTaskSelecionada() {
-  const task = JSON.parse(localStorage.getItem("taskSelecionada"))
-
-  if (task) {
-    document.getElementById("taskSelecionada").innerText = task.title
-  }
-}
-
-async function carregarTempoFoco() {
-  const { data: userData } = await supabase.auth.getUser()
-
-  if (!userData.user) return
-
-  const user = userData.user
-
-  // 📅 data de hoje
-  const hoje = new Date().toISOString().split("T")[0]
-
-  // 🔥 buscar sessões do dia
-  const { data, error } = await supabase
-    .from("study_sessions")
-    .select("duration, created_at")
-    .eq("user_id", user.id)
-
-  if (error) {
-    console.error(error)
-    return
-  }
-
-  // 🧠 filtrar só hoje
-  const totalSegundos = data
-    .filter(s => s.created_at.startsWith(hoje))
-    .reduce((acc, s) => acc + s.duration, 0)
-
-  // ⏱️ atualizar UI
-  document.getElementById("tempoFoco").innerText =
-    formatarTempo(totalSegundos)
-}
-
-async function carregarProgressoTasks() {
-  const el = document.getElementById("tasksProgresso")
-  if (!el) return
-
-  const { data: userData } = await supabase.auth.getUser()
-  if (!userData.user) return
-
-  const user = userData.user
-
-  // 📅 hoje no formato correto (LOCAL)
-  const hoje = new Date().toLocaleDateString("en-CA")
-
-  const { data, error } = await supabase
-    .from("tasks")
-    .select("completed, created_at")
-    .eq("user_id", user.id)
-
-  if (error || !data) {
-    console.error(error)
-    return
-  }
-
-  // 🔥 filtrar tarefas do dia
-  const tarefasHoje = data.filter(t => {
-    const dataTask = new Date(t.created_at).toLocaleDateString("en-CA")
-    return dataTask === hoje
-  })
-
-  const total = tarefasHoje.length
-  const concluidas = tarefasHoje.filter(t => t.completed).length
-
-  const porcentagem = total === 0
-    ? 0
-    : Math.round((concluidas / total) * 100)
-
-  el.innerText = `${concluidas}/${total} (${porcentagem}%)`
-}
-
-document.addEventListener("tasksUpdated", () => {
-  carregarProgressoTasks()
-})
-
-carregarProgressoTasks()
-
-carregarTempoFoco()
-
-carregarTaskSelecionada()
-
-// chama uma vez ao carregar
-atualizarHorario()
-
-</script>
+<script type="module" src="js/dash.js"></script>
 
 </body>
 </html>
