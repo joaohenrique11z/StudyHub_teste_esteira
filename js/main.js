@@ -1,38 +1,3 @@
-function login() {
-  const email = document.getElementById("email").value
-  const senha = document.getElementById("senha").value
-
-  const usuarioSalvo = JSON.parse(localStorage.getItem("usuario"))
-
-  if (!usuarioSalvo) {
-    alert("Usuário não encontrado!")
-    return
-  }
-
-  if (email === usuarioSalvo.email && senha === usuarioSalvo.senha) {
-    localStorage.setItem("logado", "true")
-    window.location.href = "dashboard.html"
-  } else {
-    alert("Email ou senha incorretos!")
-  }
-}
-
-function irCadastro() {
-  window.location.href = "cadastro.html"
-}
-
-function cadastrar() {
-  const email = document.getElementById("email").value
-  const senha = document.getElementById("senha").value
-
-  const usuario = { email, senha }
-
-  localStorage.setItem("usuario", JSON.stringify(usuario))
-
-  alert("Conta criada!")
-  window.location.href = "index.html"
-}
-
 function verificarLogin() {
   const logado = localStorage.getItem("logado")
 

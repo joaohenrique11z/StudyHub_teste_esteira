@@ -51,7 +51,6 @@ p {
 /* ===== CARD ===== */
 .card {
   width: 100%;
-  max-width: 380px;
   background: #111;
   border: 1px solid #222;
   border-radius: 16px;
@@ -60,10 +59,6 @@ p {
   flex-direction: column;
   gap: 10px;
   animation: fadeIn 0.4s ease;
-}
-
-.card:hover {
-  border-color: #333;
 }
 
 /* ===== ANIMAÇÃO ===== */
@@ -396,3 +391,111 @@ canvas {
     display: none;
   }
 }
+
+/* ========================= */
+/* 🧠 DASHBOARD */
+/* ========================= */
+
+/* NAV AJUSTE */
+.logo-icon {
+  width: 150px;
+  height: auto;
+}
+
+.filtro-topo {
+  margin-left: 10px;
+  max-width: 180px;
+}
+
+.frase {
+  margin-left: auto;
+  font-size: 13px;
+  color: #777;
+}
+
+/* ===== STATS ===== */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.stat-card {
+  background: #0f0f0f;
+  border: 1px solid #222;
+  padding: 12px;
+  border-radius: 12px;
+  font-size:16px;
+  font-weight: 500;
+  text-align: center;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.stat-card-in{
+  border: 1px solid #222;
+  padding: 12px;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 18px;
+  color: #cbcaca;
+  margin-bottom: 20px;
+  margin-top:20px;
+}
+
+.motivation-card {
+  background: #1c1c1c;
+  padding: 15px;
+  margin-bottom: 20px;
+  font-size: 15px;
+  text-align: left;
+  font-style: italic;
+  color: #aaa;
+}
+
+/* ===== GRID PRINCIPAL ===== */
+.main-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 20px;
+}
+
+/* ===== TASKS ===== */
+.tasks-card {
+  min-height: 400px;
+}
+
+/* ===== TIMER ===== */
+.timer-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 400px;
+}
+
+/* TASK SELECIONADA */
+.task-selected {
+  border: 1px solid #222;
+  padding: 12px;
+  border-radius: 10px;
+  text-align: center;
+  color: #888;
+  margin-bottom: 20px;
+}
+
+/* TIMER */
+.timer-display {
+  font-size: 42px;
+  text-align: center;
+  font-weight: 600;
+}
+
+/* BOTÕES */
+.timer-actions {
+  display: flex;
+  gap: 10px;
+}
+

@@ -5,54 +5,224 @@
   <title>Dashboard</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
-
-<script type="module">
-  import { carregarTarefas } from './js/tasks.js'
-  carregarTarefas() // carrega tudo inicialmente
-</script>
-
 <body>
 
-<!-- Navbar -->
-<nav>
-  <a href="dashboard.html">Dashboard</a>
-  <a href="tarefas.html">Tarefas</a>
-  <a href="timer.html">Timer</a>
+<nav class="navbar">
+  <img src="imgs/lets-study.png" class="logo-icon">
+
+  <input type="date" id="dataFiltro" class="filtro-topo">
+
+  <span class="frase">Bons estudos :)</span>
   <a href="estatisticas.html">Estatísticas</a>
-  <a href="calendario.html">Calendário</a>
-  <a href="perfil.html">Perfil</a>
+  <a href="tarefas.html">Tarefas</a>
   <a href="sobre.html">Sobre</a>
+  <a href="perfil.html">Perfil</a>
 </nav>
 
-<!-- Conteúdo -->
-<h1 style="margin:20px;">Meu Hub de Estudos</h1>
+<div class="container">
 
-<div class="card">
+  <div class="motivation-card">Not been where you want should be enough motivation</div>
 
-  <h2>Filtrar por data</h2>
+  <!-- 🔢 MÉTRICAS -->
+  <div class="stats">
 
-  <input type="date" id="dataFiltro">
+    <div class="stat-card">Horário Atual
+      <div id="horarioAtual" class="stat-card-in">3h 45m</div>
+    </div>
 
-  <button onclick="aplicarFiltro()">Filtrar</button>
-  <button onclick="limparFiltro()" class="btn-secondary">Limpar</button>
+    <div class="stat-card">Tempo de Foco
+      <div id="tempoFoco" class="stat-card-in"></div>
+    </div>
+
+    <div class="stat-card">Progresso Tasks
+      <div id="tasksProgresso" class="stat-card-in"></div>
+    </div>
+
+  </div>
+
+  <!-- 📊 CONTEÚDO PRINCIPAL -->
+  <div class="main-grid">
+
+    <!-- 📋 TASKS -->
+    <div class="card tasks-card">
+      <h2>Tarefas</h2>
+      <div id="listaTarefas"></div>
+    </div>
+
+    <!-- ⏱️ TIMER -->
+    <div class="card timer-card">
+
+    <div class="task-selected" id="taskSelecionada">
+      Selecione uma Tarefa
+    </div>
+
+    <div class="timer-display" id="timer">
+      00:00:00
+    </div>
+
+    <div class="timer-actions">
+      <button id="btnIniciar">Iniciar</button>
+      <button id="btnSalvar" class="btn-secondary">Salvar</button>
+    </div>
+
+    </div>
+
+  </div>
 
 </div>
-
-<div class="card">
-  <h2>Minhas Tarefas</h2>
-
-  <div id="listaTarefas"></div>
-
-  <button onclick="irNovaTarefa()">+ Nova tarefa</button>
-</div>
-
 
 <script type="module">
-  import { protegerPagina } from './js/guard.js'
-  protegerPagina()
-</script>
+  import { supabase } from './js/supabase.js'
+  import { carregarTarefas } from './js/tasks.js'
+  carregarTarefas()
 
-<script src="js/main.js"></script>
+  function pegarHorarioAtual() {
+  const agora = new Date()
+
+  const horas = String(agora.getHours()).padStart(2, '0')
+  const minutos = String(agora.getMinutes()).padStart(2, '0')
+  const segundos = String(agora.getSeconds()).padStart(2, '0')
+
+  return `${horas}:${minutos}:${segundos}`
+  } 
+
+  function atualizarHorario() {
+  const horario = pegarHorarioAtual()
+  document.getElementById("horarioAtual").innerText = horario
+  }
+
+// atualiza a cada segundo
+setInterval(atualizarHorario, 1000)
+
+let tempo = 0
+let intervalo = null
+let rodando = false
+
+function formatarTempo(segundos) {
+  const h = String(Math.floor(segundos / 3600)).padStart(2, "0")
+  const m = String(Math.floor((segundos % 3600) / 60)).padStart(2, "0")
+  const s = String(segundos % 60).padStart(2, "0")
+
+  return `${h}:${m}:${s}`
+}
+
+const btnIniciar = document.getElementById("btnIniciar")
+const display = document.getElementById("timer")
+
+btnIniciar.addEventListener("click", () => {
+  if (!rodando) {
+    intervalo = setInterval(() => {
+      tempo++
+      display.innerText = formatarTempo(tempo)
+    }, 1000)
+
+    rodando = true
+    btnIniciar.innerText = "Pausar"
+  } else {
+    clearInterval(intervalo)
+    rodando = false
+    btnIniciar.innerText = "Continuar"
+  }
+})
+
+const btnSalvar = document.getElementById("btnSalvar")
+
+btnSalvar.addEventListener("click", async () => {
+  const task = JSON.parse(localStorage.getItem("taskSelecionada"))
+
+  if (!task) {
+    alert("Selecione uma tarefa primeiro!")
+    return
+  }
+
+  if (tempo === 0) {
+    alert("Tempo inválido!")
+    return
+  }
+
+  // 🔐 pegar usuário logado
+  const { data: userData, error } = await supabase.auth.getUser()
+
+  if (error || !userData.user) {
+    alert("Usuário não autenticado")
+    return
+  }
+
+  const user = userData.user
+
+  // 💾 salvar no banco
+  const { error: insertError } = await supabase
+    .from("study_sessions")
+    .insert({
+      user_id: user.id,
+      task_id: task.id,
+      subject: task.subject,
+      category: task.category,
+      duration: tempo
+    })
+
+  if (insertError) {
+    console.error(insertError)
+    alert("Erro ao salvar sessão")
+    return
+  }
+
+  alert("Sessão salva com sucesso! Continue focado :)")
+
+  await carregarTempoFoco() // atualizar tempo de foco no dashboard
+
+  // 🔄 RESET TIMER
+  tempo = 0
+  document.getElementById("timer").innerText = "00:00:00"
+})
+
+function carregarTaskSelecionada() {
+  const task = JSON.parse(localStorage.getItem("taskSelecionada"))
+
+  if (task) {
+    document.getElementById("taskSelecionada").innerText = task.title
+  }
+}
+
+async function carregarTempoFoco() {
+  const { data: userData } = await supabase.auth.getUser()
+
+  if (!userData.user) return
+
+  const user = userData.user
+
+  // 📅 data de hoje
+  const hoje = new Date().toISOString().split("T")[0]
+
+  // 🔥 buscar sessões do dia
+  const { data, error } = await supabase
+    .from("study_sessions")
+    .select("duration, created_at")
+    .eq("user_id", user.id)
+
+  if (error) {
+    console.error(error)
+    return
+  }
+
+  // 🧠 filtrar só hoje
+  const totalSegundos = data
+    .filter(s => s.created_at.startsWith(hoje))
+    .reduce((acc, s) => acc + s.duration, 0)
+
+  // ⏱️ atualizar UI
+  document.getElementById("tempoFoco").innerText =
+    formatarTempo(totalSegundos)
+}
+
+carregarTempoFoco()
+
+carregarTaskSelecionada()
+
+// chama uma vez ao carregar
+atualizarHorario()
+
+</script>
 
 </body>
 </html>
