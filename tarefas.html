@@ -9,30 +9,20 @@
 <body>
 
 <nav class="navbar">
-  <a href="dashboard.html">Dashboard</a>
-  <a href="tarefas.html" class="active">Tarefas</a>
-  <a href="timer.html">Timer</a>
+  <a href="dashboard.html">
+    <img src="imgs/lets-study.png" class="logo-icon">
+  </a>
+
+  <input type="date" id="dataFiltro" class="filtro-topo">
+
+  <span class="frase">Bons estudos :)</span>
   <a href="estatisticas.html">Estatísticas</a>
-  <a href="calendario.html">Calendário</a>
-  <a href="perfil.html">Perfil</a>
+  <a href="tarefas.html">Tarefas</a>
   <a href="sobre.html">Sobre</a>
+  <a href="perfil.html">Perfil</a>
 </nav>
 
 <div class="container">
-
-  <!-- FILTRO -->
-  <div class="card filter-card">
-
-    <h2>Filtrar por data</h2>
-
-    <div class="filter-row">
-      <input type="date" id="dataFiltro">
-
-      <button onclick="aplicarFiltro()">Filtrar</button>
-      <button onclick="limparFiltro()" class="btn-secondary">Limpar</button>
-    </div>
-
-  </div>
 
   <!-- LISTA -->
   <div class="card">

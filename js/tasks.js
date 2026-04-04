@@ -68,20 +68,14 @@ export async function carregarTarefas(dataSelecionada = null) {
 
     div.innerHTML = `
     <div class="task-header">
-
         <input type="checkbox" class="task-checkbox" ${t.completed ? "checked" : ""}>
-
         <div class="task-info">
-
         <span class="task-title">${t.title}</span>
-
         <div class="task-badges">
             <span class="badge badge-category">${t.category}</span>
             <span class="badge ${getUrgencyClass(t.urgency)}">${t.urgency}</span>
         </div>
-
         </div>
-
     </div>
     `
 
@@ -89,24 +83,42 @@ export async function carregarTarefas(dataSelecionada = null) {
 
     // marcar como concluída visualmente
     if (t.completed) {
-    div.classList.add("completed")
+      div.classList.add("completed")
     }
 
-    // clique no checkbox
-    checkbox.addEventListener("click", (e) => {
-    e.stopPropagation()
+    checkbox.addEventListener("click", async (e) => {
+      e.stopPropagation()
 
-    div.classList.toggle("completed")
+      const novoStatus = checkbox.checked
+
+      const { error } = await supabase
+        .from("tasks")
+        .update({ completed: novoStatus })
+        .eq("id", t.id)
+
+      if (error) {
+        console.error(error)
+        alert("Erro ao atualizar tarefa")
+        checkbox.checked = !novoStatus
+        return
+      }
+
+      if (novoStatus) {
+        div.classList.add("completed")
+      } else {
+        div.classList.remove("completed")
+      }
+
+      // 🔥 AVISA O DASHBOARD
+      document.dispatchEvent(new Event("tasksUpdated"))
     })
+    
+    // 🔥 CORREÇÃO 1: Faltava renderizar o elemento na tela
+    container.appendChild(div) 
+    
+  }) // 🔥 CORREÇÃO 2: Faltava fechar o forEach
+} // 🔥 CORREÇÃO 3: Faltava fechar a função carregarTarefas
 
-    div.onclick = () => div.classList.toggle('open')
-
-    div.addEventListener("click", () => {
-    selecionarTask(t)})
-
-    container.appendChild(div)
-  })
-}
 
 // 👉 aplicar filtro
 window.aplicarFiltro = () => {
@@ -129,9 +141,12 @@ function getUrgencyClass(urgency) {
 
 const inputData = document.getElementById("dataFiltro")
 
-inputData.addEventListener("change", () => {
-  aplicarFiltro()
-})
+// Tratando a possibilidade de null caso a tag não exista na página
+if (inputData) {
+  inputData.addEventListener("change", () => {
+    aplicarFiltro()
+  })
+}
 
 export function selecionarTask(task) {
   localStorage.setItem("taskSelecionada", JSON.stringify(task))

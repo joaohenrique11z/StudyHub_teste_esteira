@@ -8,7 +8,9 @@
 <body>
 
 <nav class="navbar">
-  <img src="imgs/lets-study.png" class="logo-icon">
+  <a href="dashboard.html">
+    <img src="imgs/lets-study.png" class="logo-icon">
+  </a>
 
   <input type="date" id="dataFiltro" class="filtro-topo">
 
@@ -214,6 +216,50 @@ async function carregarTempoFoco() {
   document.getElementById("tempoFoco").innerText =
     formatarTempo(totalSegundos)
 }
+
+async function carregarProgressoTasks() {
+  const el = document.getElementById("tasksProgresso")
+  if (!el) return
+
+  const { data: userData } = await supabase.auth.getUser()
+  if (!userData.user) return
+
+  const user = userData.user
+
+  // 📅 hoje no formato correto (LOCAL)
+  const hoje = new Date().toLocaleDateString("en-CA")
+
+  const { data, error } = await supabase
+    .from("tasks")
+    .select("completed, created_at")
+    .eq("user_id", user.id)
+
+  if (error || !data) {
+    console.error(error)
+    return
+  }
+
+  // 🔥 filtrar tarefas do dia
+  const tarefasHoje = data.filter(t => {
+    const dataTask = new Date(t.created_at).toLocaleDateString("en-CA")
+    return dataTask === hoje
+  })
+
+  const total = tarefasHoje.length
+  const concluidas = tarefasHoje.filter(t => t.completed).length
+
+  const porcentagem = total === 0
+    ? 0
+    : Math.round((concluidas / total) * 100)
+
+  el.innerText = `${concluidas}/${total} (${porcentagem}%)`
+}
+
+document.addEventListener("tasksUpdated", () => {
+  carregarProgressoTasks()
+})
+
+carregarProgressoTasks()
 
 carregarTempoFoco()
 
