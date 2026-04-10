@@ -2,59 +2,68 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Nova Tarefa</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nova Tarefa - StudyHub</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
-
 <body>
 
-<nav>
-  <a href="dashboard.html">Dashboard</a>
+<nav class="navbar">
+  <a href="dashboard.html">
+    <img src="imgs/lets-study.png" class="logo-icon" alt="StudyHub">
+  </a>
+  <span class="frase">Bons estudos :)</span>
+  <a href="estatisticas.html">Estatísticas</a>
+  <a href="tarefas.html">Tarefas</a>
+  <a href="dicas.html">Dicas</a>
+  <a href="musicas.html">Músicas</a>
+  <a href="sobre.html">Sobre</a>
+  <a href="perfil.html">Perfil</a>
 </nav>
 
 <div class="container">
-
   <div class="card form-card">
-
-    <h1>Nova Tarefa</h1>
-    <p class="subtitle">Adicione uma nova atividade de estudo</p>
+    <h1 style="margin-bottom: 8px;">Nova Tarefa</h1>
+    <p style="color: #aaa; margin-bottom: 20px; text-align: center;">Preencha os detalhes da atividade</p>
 
     <div class="form-group">
       <label>Título</label>
       <input type="text" id="titulo" placeholder="Ex: Estudar funções">
     </div>
-
     <div class="form-group">
       <label>Matéria</label>
       <input type="text" id="materia" placeholder="Ex: Matemática">
     </div>
-
     <div class="form-group">
       <label>Categoria</label>
       <input type="text" id="categoria" placeholder="Ex: Prova, Revisão">
     </div>
-
     <div class="form-group">
       <label>Urgência</label>
       <select id="urgencia">
         <option value="baixa">Baixa</option>
-        <option value="media">Média</option>
+        <option value="media" selected>Média</option>
         <option value="alta">Alta</option>
       </select>
     </div>
-
     <div class="form-group">
       <label>Notas</label>
       <textarea id="notas" placeholder="Anotações importantes..."></textarea>
     </div>
 
-    <button onclick="criarTarefa()">Salvar tarefa</button>
-
+    <button onclick="criarTarefa()" class="btn-primary" style="width: 100%; margin-top: 10px;">Salvar tarefa</button>
+    <p class="link" onclick="window.location.href='dashboard.html'" style="margin-top: 16px;">← Cancelar</p>
   </div>
-
 </div>
 
-<script type="module" src="js/tasks.js"></script>
+<footer style="text-align: center; padding: 30px; color: #555; font-size: 13px;">
+  LetsStudy – Seu espaço de produtividade
+</footer>
 
+<script type="module">
+  import { protegerPagina } from './js/guard.js';
+  await protegerPagina();
+</script>
+<script type="module" src="js/tasks.js"></script>
 </body>
 </html>

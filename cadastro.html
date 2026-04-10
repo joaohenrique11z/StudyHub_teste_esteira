@@ -2,41 +2,40 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Criar Conta - StudyHub</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body class="auth">
 
+<!-- ============================================= -->
+<!-- LAYOUT DE AUTENTICAÇÃO (CADASTRO)              -->
+<!-- ============================================= -->
 <div class="auth-layout">
-
-  <!-- LADO ESQUERDO -->
+  
+  <!-- LADO ESQUERDO: LOGO GRANDE -->
   <div class="auth-left">
-    <img src="imgs/lets-study.png" class="logo-big">
+    <img src="imgs/lets-study.png" class="logo-big" alt="Logo StudyHub">
   </div>
 
-  <!-- LADO DIREITO -->
+  <!-- LADO DIREITO: FORMULÁRIO DE CADASTRO -->
   <div class="auth-right">
     <div class="card-auth">
-
       <h1>Criar Conta</h1>
       <p class="subtitle">Comece a organizar seus estudos</p>
 
-      <input type="email" id="email" placeholder="Email">
-      <input type="password" id="senha" placeholder="Senha">
+      <input type="email" id="email" placeholder="Email" autocomplete="email">
+      <input type="password" id="senha" placeholder="Senha" autocomplete="new-password">
 
       <button onclick="cadastrar()">Cadastrar</button>
 
-      <!-- LINK -->
       <p class="link" onclick="window.location.href='index.html'">Já tenho conta</p>
 
-      <!-- ERRO -->
       <p id="erro" class="erro"></p>
-
     </div>
   </div>
-
 </div>
 
 <script type="module" src="js/auth.js"></script>
-
 </body>
+</html>

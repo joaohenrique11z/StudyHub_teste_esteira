@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Músicas para Estudar - StudyHub</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .music-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+      margin: 30px 0;
+    }
+    .music-card {
+      background: #0f0f0f;
+      border: 1px solid #222;
+      border-radius: 16px;
+      padding: 20px;
+    }
+    .music-card h3 {
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .music-card iframe {
+      width: 100%;
+      height: 160px;
+      border-radius: 10px;
+      border: none;
+    }
+    .music-description {
+      font-size: 13px;
+      color: #aaa;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="dashboard.html">
+    <img src="imgs/lets-study.png" class="logo-icon" alt="StudyHub">
+  </a>
+  <span class="frase">Bons estudos :)</span>
+  <a href="estatisticas.html">Estatísticas</a>
+  <a href="tarefas.html">Tarefas</a>
+  <a href="dicas.html">Dicas</a>
+  <a href="musicas.html">Músicas</a>
+  <a href="sobre.html">Sobre</a>
+  <a href="perfil.html">Perfil</a>
+</nav>
+
+<div class="container">
+  <h1 style="margin-bottom: 10px;">🎧 Músicas para Concentração</h1>
+  <p style="color: #aaa;">Trilhas sonoras que ajudam a manter o foco durante os estudos.</p>
+
+  <div class="music-grid">
+    <!-- Lo-Fi Hip Hop -->
+    <div class="music-card">
+      <h3>🎵 Lo-Fi Hip Hop</h3>
+      <iframe src="https://www.youtube.com/embed/jfKfPfyJRdk" title="lofi hip hop radio" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <p class="music-description">Batidas calmas e repetitivas, ideais para leitura e tarefas criativas.</p>
+    </div>
+
+    <!-- Música Clássica -->
+    <div class="music-card">
+      <h3>🎻 Música Clássica</h3>
+      <iframe src="https://www.youtube.com/embed/WvPbDd4Hv6M" title="Classical Music for Studying" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <p class="music-description">Obras de Mozart, Beethoven e outros – conhecidas por estimular o cérebro.</p>
+    </div>
+
+    <!-- Sons da Natureza -->
+    <div class="music-card">
+      <h3>🌧️ Chuva & Natureza</h3>
+      <iframe src="https://www.youtube.com/embed/yIQd2Ya0G9Q" title="rain sounds for studying" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <p class="music-description">Sons de chuva, floresta ou ondas do mar para mascarar ruídos externos.</p>
+    </div>
+
+    <!-- Jazz Suave -->
+    <div class="music-card">
+      <h3>🎷 Jazz Suave</h3>
+      <iframe src="https://www.youtube.com/embed/4O73d3kHt5s" title="smooth jazz for work" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <p class="music-description">Jazz instrumental tranquilo, ótimo para quem gosta de música mais "viva".</p>
+    </div>
+  </div>
+
+  <!-- Dica adicional -->
+  <div style="background: #111; border-radius: 14px; padding: 20px; border: 1px solid #222;">
+    <h3 style="display: flex; gap: 8px;">💡 Dica</h3>
+    <p style="color: #ccc;">Mantenha o volume baixo ou moderado. Músicas com letra podem atrapalhar a leitura – prefira faixas instrumentais.</p>
+  </div>
+</div>
+
+<footer style="text-align: center; padding: 30px; color: #555; font-size: 13px;">
+  LetsStudy – Seu espaço de produtividade
+</footer>
+</body>
+</html>

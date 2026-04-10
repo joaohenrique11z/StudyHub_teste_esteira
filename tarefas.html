@@ -2,52 +2,65 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Tarefas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tarefas - StudyHub</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
-
 <body>
 
+<!-- ============================================= -->
+<!-- BARRA DE NAVEGAÇÃO                             -->
+<!-- ============================================= -->
 <nav class="navbar">
   <a href="dashboard.html">
-    <img src="imgs/lets-study.png" class="logo-icon">
+    <img src="imgs/lets-study.png" class="logo-icon" alt="StudyHub">
   </a>
-
   <input type="date" id="dataFiltro" class="filtro-topo">
-
   <span class="frase">Bons estudos :)</span>
   <a href="estatisticas.html">Estatísticas</a>
   <a href="tarefas.html">Tarefas</a>
+  <a href="dicas.html">Dicas</a>
+  <a href="musicas.html">Músicas</a>
   <a href="sobre.html">Sobre</a>
   <a href="perfil.html">Perfil</a>
 </nav>
 
+<!-- ============================================= -->
+<!-- CONTEÚDO: LISTA DE TAREFAS COMPLETA            -->
+<!-- ============================================= -->
 <div class="container">
-
-  <!-- LISTA -->
   <div class="card">
-
-    <div class="card-header">
-      <h2>Lista de Tarefas</h2>
-      <button onclick="irNovaTarefa()" class="btn-primary">
-        + Nova tarefa
-      </button>
-    </div>
-
-    <div id="listaTarefas"></div>
-
+  <div class="card-header">
+    <h2>Lista de Tarefas</h2>
+    <button onclick="irNovaTarefa()" class="btn-primary">
+      <span style="font-size: 16px;">+</span> Nova tarefa
+    </button>
   </div>
-
+  <div id="listaTarefas"></div>
+</div>
 </div>
 
-<script type="module" src="js/tasks.js"></script>
+<footer style="text-align: center; padding: 30px; color: #555; font-size: 13px;">
+  LetsStudy – Seu espaço de produtividade
+</footer>
 
 <script type="module">
-  import { carregarTarefas } from './js/tasks.js'
-  carregarTarefas()
+  // Importações necessárias
+  import { protegerPagina } from './js/guard.js';
+  import { carregarTarefas } from './js/tasks.js';
+
+  // Verifica autenticação
+  await protegerPagina();
+
+  // Define a data de hoje como padrão no filtro
+  const hoje = new Date().toLocaleDateString("en-CA");
+  document.getElementById("dataFiltro").value = hoje;
+
+  // Carrega as tarefas do dia
+  carregarTarefas(hoje);
+
+  // Função global para redirecionar à página de nova tarefa
+  window.irNovaTarefa = () => window.location.href = "nova-tarefa.html";
 </script>
-
-<script src="js/main.js"></script>
-
 </body>
 </html>

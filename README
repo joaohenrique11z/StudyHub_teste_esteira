@@ -1,0 +1,112 @@
+# 📚 StudyHub – Hub de Estudos Pessoal
+
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
+![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=flat&logo=supabase&logoColor=white)
+![Chart.js](https://img.shields.io/badge/Chart.js-FF6384?style=flat&logo=chartdotjs&logoColor=white)
+
+> **Projeto Individual – Desenvolvimento Web**  
+> 4º período de Engenharias de Software  
+> Aluna: Maria Letícia de Sousa Barboza
+
+---
+
+## 📖 Sobre o Projeto
+
+**StudyHub** é uma aplicação web desenvolvida como projeto individual da disciplina de Desenvolvimento Web. O objetivo é fornecer uma plataforma simples e eficiente para estudantes organizarem suas rotinas de estudo, registrarem o tempo dedicado a cada tarefa e visualizarem seu progresso através de estatísticas detalhadas.
+
+A aplicação consome a API do **Supabase** para autenticação de usuários e persistência de dados, oferecendo uma experiência completa de front-end integrada a um back-end serverless.
+
+---
+
+## ✨ Funcionalidades Principais
+
+- 🔐 **Autenticação de usuários** (cadastro, login, logout)
+- 📋 **Gerenciamento de tarefas**: criar, listar, marcar como concluída e excluir
+- 🏷️ **Categorização por matéria, categoria e nível de urgência**
+- ⏱️ **Cronômetro integrado** para registrar sessões de estudo por tarefa
+- 📊 **Dashboard com métricas diárias**:
+  - Horário atual em tempo real
+  - Tempo total de foco no dia
+  - Progresso de tarefas (concluídas/total)
+- 📈 **Página de estatísticas**:
+  - Matéria mais estudada
+  - Tempo total acumulado, dia mais produtivo e média diária
+  - Gráfico de barras com distribuição de tempo por matéria (Chart.js)
+- 🧠 **Página de dicas** com técnicas de estudo (Pomodoro, Feynman, etc.)
+- 🎧 **Página de playlists** com embeds do YouTube para música de concentração
+- 📱 **Layout responsivo** (desktop e mobile)
+
+---
+
+## 🛠️ Tecnologias Utilizadas
+
+| Tecnologia | Descrição |
+|------------|-----------|
+| **HTML5** | Estrutura semântica das páginas |
+| **CSS3** | Estilização com tema escuro, Grid, Flexbox e animações |
+| **JavaScript (ES6+)** | Módulos, async/await, manipulação do DOM |
+| **Supabase** | Backend as a Service: autenticação e banco de dados PostgreSQL |
+| **Chart.js** | Biblioteca para criação de gráficos |
+| **Google Fonts** | Fonte Inter (tipografia) |
+
+---
+
+## 🗂️ Estrutura do Projeto
+StudyHub/
+├── index.html # Página de login
+├── cadastro.html # Página de criação de conta
+├── dashboard.html # Painel principal (tarefas, timer, métricas)
+├── tarefas.html # Lista completa de tarefas com filtro por data
+├── nova-tarefa.html # Formulário de criação de tarefa
+├── estatisticas.html # Gráficos e resumos de estudo
+├── perfil.html # Dados do usuário e logout
+├── sobre.html # Informações sobre o projeto
+├── dicas.html # Cards com técnicas de estudo
+├── musicas.html # Playlists do YouTube para foco
+│
+├── css/
+│ └── styles.css # Estilos globais (tema escuro)
+│
+├── js/
+│ ├── supabase.js # Configuração do cliente Supabase
+│ ├── auth.js # Funções de login, cadastro e logout
+│ ├── guard.js # Proteção de rotas (redireciona se não autenticado)
+│ ├── tasks.js # CRUD de tarefas e seleção para timer
+│ ├── dash.js # Lógica do dashboard (timer, métricas, filtro)
+│ └── estatisticas.js # Cálculos e gráficos para a página de estatísticas
+│
+├── imgs/
+│ └── lets-study.png # Logo do StudyHub
+│
+└── README.md # Este arquivo
+
+## 🔐 Segurança e Credenciais
+A chave do Supabase presente no arquivo js/supabase.js é a chave anônima (publishable key), destinada exclusivamente ao front‑end. Ela não concede acesso irrestrito aos dados.
+
+Toda a segurança é garantida pelas Row Level Security (RLS) habilitadas no banco de dados, que asseguram que cada usuário acesse apenas seus próprios registros. A chave secreta (service_role) não está exposta no código.
+
+## 🎓 Informações Acadêmicas
+Disciplina: Desenvolvimento Web
+Curso: Engenharia de Software – 4º Período
+Instituição: IFPE Campus Belo Jardim
+Professor(a): Fábio Feliciano
+Aluno: Maria Letícia de Sousa Barboza
+Período letivo: 2026/1
+
+## 📸 Capturas de Tela
+🔐 Login
+https://./screenshots/login.png
+
+📊 Dashboard
+https://./screenshots/dashboard.png
+
+📈 Estatísticas
+https://./screenshots/estatisticas.png
+
+📋 Lista de Tarefas
+https://./screenshots/tarefas.png
+
+## 📝 Licença
+Este projeto foi desenvolvido exclusivamente para fins educacionais. Sinta‑se à vontade para estudar o código e adaptá‑lo.

@@ -2,47 +2,45 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login - StudyHub</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
-
 <body class="auth">
 
+<!-- ============================================= -->
+<!-- LAYOUT DE AUTENTICAÇÃO (LOGIN)                 -->
+<!-- ============================================= -->
 <div class="auth-layout">
-
-  <!-- LADO ESQUERDO (LOGO GRANDE) -->
+  
+  <!-- LADO ESQUERDO: LOGO GRANDE -->
   <div class="auth-left">
     <img src="imgs/lets-study.png" alt="Logo StudyHub" class="logo-big">
   </div>
 
-  <!-- LADO DIREITO (FORMULÁRIO) -->
+  <!-- LADO DIREITO: FORMULÁRIO DE LOGIN -->
   <div class="auth-right">
-    
     <div class="card-auth">
-
       <h1>Login</h1>
-      <p class="subtitle">Bem-vindo de volta! <br> Organize seus estudos com eficiência</p>
+      <p class="subtitle">Bem-vindo de volta!<br>Organize seus estudos com eficiência</p>
 
-      <!-- INPUTS -->
-      <input type="email" id="email" placeholder="Email">
-      <input type="password" id="senha" placeholder="Senha">
+      <!-- Campos de entrada -->
+      <input type="email" id="email" placeholder="Email" autocomplete="email">
+      <input type="password" id="senha" placeholder="Senha" autocomplete="current-password">
 
-      <!-- BOTÃO -->
+      <!-- Botão de ação (chama função global login() definida em auth.js) -->
       <button onclick="login()">Entrar</button>
 
-      <!-- LINK -->
+      <!-- Link para página de cadastro -->
       <p class="link" onclick="irCadastro()">Criar conta</p>
 
-      <!-- ERRO -->
+      <!-- Exibição de mensagens de erro -->
       <p id="erro" class="erro"></p>
-
     </div>
-
   </div>
-
 </div>
 
+<!-- Script principal de autenticação -->
 <script type="module" src="js/auth.js"></script>
-
 </body>
 </html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dicas de Estudo - StudyHub</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* Estilos específicos para a página de dicas */
+    .dicas-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .dica-card {
+      background: #0f0f0f;
+      border: 1px solid #222;
+      border-radius: 16px;
+      padding: 20px;
+      transition: 0.2s;
+    }
+    .dica-card:hover {
+      border-color: #444;
+      transform: translateY(-3px);
+    }
+    .dica-card h3 {
+      font-size: 18px;
+      margin-bottom: 8px;
+      color: white;
+    }
+    .dica-card p {
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    .dica-icon {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="dashboard.html">
+    <img src="imgs/lets-study.png" class="logo-icon" alt="StudyHub">
+  </a>
+  <span class="frase">Bons estudos :)</span>
+  <a href="estatisticas.html">Estatísticas</a>
+  <a href="tarefas.html">Tarefas</a>
+  <a href="dicas.html">Dicas</a>
+  <a href="musicas.html">Músicas</a>
+  <a href="sobre.html">Sobre</a>
+  <a href="perfil.html">Perfil</a>
+</nav>
+
+<div class="container">
+  <h1 style="margin-bottom: 10px;">🧠 Técnicas de Estudo</h1>
+  <p style="color: #aaa;">Pequenas estratégias que podem fazer grande diferença na sua aprendizagem.</p>
+
+  <div class="dicas-grid">
+    <!-- Card: Técnica Pomodoro -->
+    <div class="dica-card">
+      <div class="dica-icon">🍅</div>
+      <h3>Técnica Pomodoro</h3>
+      <p>Estude por 25 minutos ininterruptos, depois faça uma pausa de 5 minutos. A cada 4 ciclos, faça uma pausa maior (15–30 min).</p>
+    </div>
+
+    <!-- Card: Técnica Feynman -->
+    <div class="dica-card">
+      <div class="dica-icon">📝</div>
+      <h3>Técnica Feynman</h3>
+      <p>Escolha um conceito e tente explicá-lo com palavras simples, como se estivesse ensinando a uma criança. Identifique lacunas e revise.</p>
+    </div>
+
+    <!-- Card: Revisão Espaçada -->
+    <div class="dica-card">
+      <div class="dica-icon">📅</div>
+      <h3>Revisão Espaçada</h3>
+      <p>Revise o conteúdo em intervalos crescentes: 1 dia, 3 dias, 1 semana, 1 mês. Isso fortalece a memória de longo prazo.</p>
+    </div>
+
+    <!-- Card: Estudo Ativo -->
+    <div class="dica-card">
+      <div class="dica-icon">🎯</div>
+      <h3>Estudo Ativo</h3>
+      <p>Em vez de apenas ler, faça perguntas, resolva exercícios, crie mapas mentais ou flashcards. O cérebro aprende fazendo.</p>
+    </div>
+
+    <!-- Card: Sono e Consolidação -->
+    <div class="dica-card">
+      <div class="dica-icon">😴</div>
+      <h3>Sono e Consolidação</h3>
+      <p>Dormir bem após estudar ajuda a consolidar as memórias. Evite virar a noite antes de provas importantes.</p>
+    </div>
+
+    <!-- Card: Ambiente Organizado -->
+    <div class="dica-card">
+      <div class="dica-icon">🌿</div>
+      <h3>Ambiente Organizado</h3>
+      <p>Um local silencioso, bem iluminado e livre de distrações (celular longe) aumenta muito a concentração.</p>
+    </div>
+  </div>
+</div>
+
+<footer style="text-align: center; padding: 30px; color: #555; font-size: 13px;">
+  StudyHub – Organize seus estudos com eficiência
+</footer>
+</body>
+</html>

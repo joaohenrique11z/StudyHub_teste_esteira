@@ -2,83 +2,125 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - StudyHub</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
+<!-- ============================================= -->
+<!-- BARRA DE NAVEGAÇÃO SUPERIOR                    -->
+<!-- ============================================= -->
 <nav class="navbar">
+  <!-- Logo clicável que leva ao dashboard -->
   <a href="dashboard.html">
-    <img src="imgs/lets-study.png" class="logo-icon">
+    <img src="imgs/lets-study.png" class="logo-icon" alt="StudyHub">
   </a>
 
+  <!-- Filtro de data -->
   <input type="date" id="dataFiltro" class="filtro-topo">
 
+  <!-- Mensagem motivacional -->
   <span class="frase">Bons estudos :)</span>
+
+  <!-- Links de navegação principais -->
   <a href="estatisticas.html">Estatísticas</a>
   <a href="tarefas.html">Tarefas</a>
+  <a href="dicas.html">Dicas</a>
+  <a href="musicas.html">Músicas</a>
   <a href="sobre.html">Sobre</a>
   <a href="perfil.html">Perfil</a>
 </nav>
 
+<!-- ============================================= -->
+<!-- CONTEÚDO PRINCIPAL DO DASHBOARD                -->
+<!-- ============================================= -->
 <div class="container">
-
-  <!-- 🔢 MÉTRICAS -->
+  
+  <!-- MÉTRICAS SUPERIORES (3 CARDS) -->
   <div class="stats">
-
-    <div class="stat-card">Horário Atual
-      <div id="horarioAtual" class="stat-card-in">3h 45m</div>
+    <!-- Horário atual ao vivo -->
+    <div class="stat-card">
+      <div class="stat-icon">🕒</div>
+      <div class="stat-label">Horário Atual</div>
+      <div id="horarioAtual" class="stat-value">--:--:--</div>
     </div>
 
-    <div class="stat-card">Tempo de Foco
-      <div id="tempoFoco" class="stat-card-in"></div>
+    <!-- Tempo total de foco no dia selecionado -->
+    <div class="stat-card">
+      <div class="stat-icon">⚡</div>
+      <div class="stat-label">Tempo de Foco</div>
+      <div id="tempoFoco" class="stat-value">00:00:00</div>
     </div>
 
-    <div class="stat-card">Progresso Tasks
-      <div id="tasksProgresso" class="stat-card-in"></div>
+    <!-- Progresso de tarefas (concluídas / total) -->
+    <div class="stat-card">
+      <div class="stat-icon">✅</div>
+      <div class="stat-label">Progresso Tasks</div>
+      <div id="tasksProgresso" class="stat-value">0/0 (0%)</div>
     </div>
-
   </div>
 
-  <!-- 📊 CONTEÚDO PRINCIPAL -->
+  <!-- GRID PRINCIPAL (duas colunas: tarefas e timer) -->
   <div class="main-grid">
-
-    <!-- 📋 TASKS -->
+    
+    <!-- COLUNA ESQUERDA: LISTA DE TAREFAS -->
     <div class="card tasks-card">
-      <h2>Tarefas</h2>
+      <div class="card-header">
+        <h2>📋 Tarefas do dia</h2>
+      </div>
+
+      <!-- Container onde as tarefas serão injetadas via JavaScript -->
       <div id="listaTarefas"></div>
-      <button onclick="window.location.href='nova-tarefa.html'" class="btn-primary">+</button>
+
+      <!-- Botão para adicionar nova tarefa -->
+      <button onclick="window.location.href='nova-tarefa.html'" class="btn-add-task">
+        + Adicionar nova tarefa
+      </button>
     </div>
 
-    <!-- ⏱️ TIMER -->
+    <!-- COLUNA DIREITA: CRONÔMETRO E TAREFA SELECIONADA -->
     <div class="card timer-card">
+      <div class="timer-header">
+        <h3>⏱️ Cronômetro</h3>
+      </div>
 
-    <div class="task-selected">
-      <h3 id="taskTitulo">Selecione uma tarefa</h3>
+      <!-- Exibição da tarefa atualmente selecionada -->
+      <div class="task-selected">
+        <div class="selected-task-header">
+          <span class="selected-label">Tarefa atual</span>
+        </div>
+        <h3 id="taskTitulo">Selecione uma tarefa</h3>
+        <div id="taskBadges" class="task-selected-badges"></div>
+        <div id="taskInfo" class="task-selected-info"></div>
+        <p id="taskNotas" class="task-selected-notes"></p>
+      </div>
 
-      <div id="taskBadges" class="task-selected-badges"></div>
+      <!-- Display do timer -->
+      <div class="timer-display" id="timer">00:00:00</div>
 
-      <div id="taskInfo" class="task-selected-info"></div>
-
-      <p id="taskNotas" class="task-selected-notes"></p>
+      <!-- Botões de controle do timer -->
+      <div class="timer-actions">
+        <button id="btnIniciar" class="btn-primary">▶ Iniciar</button>
+        <button id="btnSalvar" class="btn-secondary">💾 Salvar</button>
+      </div>
     </div>
-
-    <div class="timer-display" id="timer">
-      00:00:00
-    </div>
-
-    <div class="timer-actions">
-      <button id="btnIniciar">Iniciar</button>
-      <button id="btnSalvar" class="btn-secondary">Salvar</button>
-    </div>
-
-    </div>
-
   </div>
-
 </div>
 
-<script type="module" src="js/dash.js"></script>
+<!-- Rodapé simples -->
+<footer style="text-align: center; padding: 30px; color: #555; font-size: 13px;">
+  LetsStudy – Seu espaço de produtividade
+</footer>
 
+<!-- Scripts -->
+<script type="module">
+  // Proteção de rota: redireciona para login se não autenticado
+  import { protegerPagina } from './js/guard.js';
+  await protegerPagina();
+
+  // O módulo dash.js contém toda a lógica do dashboard
+  import './js/dash.js';
+</script>
 </body>
 </html>
