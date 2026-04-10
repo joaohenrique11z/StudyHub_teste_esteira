@@ -1,4 +1,4 @@
-# 📚 StudyHub – Hub de Estudos Pessoal
+# 📚 LetsStudy – Hub de Estudos Pessoal
 
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white)
@@ -6,9 +6,10 @@
 ![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=flat&logo=supabase&logoColor=white)
 ![Chart.js](https://img.shields.io/badge/Chart.js-FF6384?style=flat&logo=chartdotjs&logoColor=white)
 
-> **Projeto Individual – Desenvolvimento Web**  
-> 4º período de Engenharias de Software  
-> Aluna: Maria Letícia de Sousa Barboza
+>  **Projeto Individual – Desenvolvimento Web**
+> 
+> **Curso:** Engenharia de Software (4º Período)  
+> **Autora:** Maria Letícia de Sousa Barboza
 
 ---
 
@@ -20,7 +21,7 @@ A aplicação consome a API do **Supabase** para autenticação de usuários e p
 
 ---
 
-## ✨ Funcionalidades Principais
+## Funcionalidades Principais
 
 - 🔐 **Autenticação de usuários** (cadastro, login, logout)
 - 📋 **Gerenciamento de tarefas**: criar, listar, marcar como concluída e excluir
@@ -36,7 +37,6 @@ A aplicação consome a API do **Supabase** para autenticação de usuários e p
   - Gráfico de barras com distribuição de tempo por matéria (Chart.js)
 - 🧠 **Página de dicas** com técnicas de estudo (Pomodoro, Feynman, etc.)
 - 🎧 **Página de playlists** com embeds do YouTube para música de concentração
-- 📱 **Layout responsivo** (desktop e mobile)
 
 ---
 
@@ -54,59 +54,69 @@ A aplicação consome a API do **Supabase** para autenticação de usuários e p
 ---
 
 ## 🗂️ Estrutura do Projeto
+
+```text
 StudyHub/
-├── index.html # Página de login
-├── cadastro.html # Página de criação de conta
-├── dashboard.html # Painel principal (tarefas, timer, métricas)
-├── tarefas.html # Lista completa de tarefas com filtro por data
-├── nova-tarefa.html # Formulário de criação de tarefa
-├── estatisticas.html # Gráficos e resumos de estudo
-├── perfil.html # Dados do usuário e logout
-├── sobre.html # Informações sobre o projeto
-├── dicas.html # Cards com técnicas de estudo
-├── musicas.html # Playlists do YouTube para foco
+├── index.html            # Página de login
+├── cadastro.html         # Página de criação de conta
+├── dashboard.html        # Painel principal (tarefas, timer, métricas)
+├── tarefas.html          # Lista completa de tarefas com filtro por data
+├── nova-tarefa.html      # Formulário de criação de tarefa
+├── estatisticas.html     # Gráficos e resumos de estudo
+├── perfil.html           # Dados do usuário e logout
+├── sobre.html            # Informações sobre o projeto
+├── dicas.html            # Cards com técnicas de estudo
+├── musicas.html          # Playlists do YouTube para foco
 │
 ├── css/
-│ └── styles.css # Estilos globais (tema escuro)
+│   └── styles.css        # Estilos globais (tema escuro)
 │
 ├── js/
-│ ├── supabase.js # Configuração do cliente Supabase
-│ ├── auth.js # Funções de login, cadastro e logout
-│ ├── guard.js # Proteção de rotas (redireciona se não autenticado)
-│ ├── tasks.js # CRUD de tarefas e seleção para timer
-│ ├── dash.js # Lógica do dashboard (timer, métricas, filtro)
-│ └── estatisticas.js # Cálculos e gráficos para a página de estatísticas
+│   ├── supabase.js       # Configuração do cliente Supabase
+│   ├── auth.js           # Funções de login, cadastro e logout
+│   ├── guard.js          # Proteção de rotas (redireciona se não autenticado)
+│   ├── tasks.js          # CRUD de tarefas e seleção para timer
+│   ├── dash.js           # Lógica do dashboard (timer, métricas, filtro)
+│   └── estatisticas.js   # Cálculos e gráficos para a página de estatísticas
 │
 ├── imgs/
-│ └── lets-study.png # Logo do StudyHub
+│   └── lets-study.png    # Logo do StudyHub
 │
-└── README.md # Este arquivo
+└── README.md             # Este arquivo
+```
 
 ## 🔐 Segurança e Credenciais
-A chave do Supabase presente no arquivo js/supabase.js é a chave anônima (publishable key), destinada exclusivamente ao front‑end. Ela não concede acesso irrestrito aos dados.
 
-Toda a segurança é garantida pelas Row Level Security (RLS) habilitadas no banco de dados, que asseguram que cada usuário acesse apenas seus próprios registros. A chave secreta (service_role) não está exposta no código.
+A chave do Supabase presente no arquivo `js/supabase.js` é a chave anônima (publishable key), destinada exclusivamente ao front-end. Ela não concede acesso irrestrito aos dados.
+
+Toda a segurança é garantida pelas **Row Level Security (RLS)** habilitadas no banco de dados, que asseguram que cada usuário acesse apenas seus próprios registros. 
+
+---
 
 ## 🎓 Informações Acadêmicas
-Disciplina: Desenvolvimento Web
-Curso: Engenharia de Software – 4º Período
-Instituição: IFPE Campus Belo Jardim
-Professor(a): Fábio Feliciano
-Aluno: Maria Letícia de Sousa Barboza
-Período letivo: 2026/1
+
+- **Disciplina:** Desenvolvimento Web
+- **Curso:** Engenharia de Software – 4º Período
+- **Instituição:** IFPE Campus Belo Jardim
+- **Professor(a):** Fábio Feliciano
+- **Aluna:** Maria Letícia de Sousa Barboza
+- **Período letivo:** 2026/1
+
+---
 
 ## 📸 Capturas de Tela
-🔐 Login
-https://./screenshots/login.png
 
-📊 Dashboard
-https://./screenshots/dashboard.png
+**🔐 Login** ![Tela de Login](imgs/screenshots/login.png)
 
-📈 Estatísticas
-https://./screenshots/estatisticas.png
+**📊 Dashboard** ![Dashboard Principal](imgs/screenshots/dashboard.png)
 
-📋 Lista de Tarefas
-https://./screenshots/tarefas.png
+**📈 Estatísticas** ![Página de Estatísticas](imgs/screenshots/estatisticas1.png)
+![Página de Estatísticas](imgs/screenshots/estatisticas2.png)
+
+**📋 Lista de Tarefas** ![Lista de Tarefas](imgs/screenshots/tarefas.png)
+
+---
 
 ## 📝 Licença
-Este projeto foi desenvolvido exclusivamente para fins educacionais. Sinta‑se à vontade para estudar o código e adaptá‑lo.
+
+Este projeto foi desenvolvido exclusivamente para fins educacionais. Sinta-se à vontade para estudar o código e adaptá-lo.
