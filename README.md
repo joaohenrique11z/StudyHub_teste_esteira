@@ -11,6 +11,16 @@
 > **Curso:** Engenharia de Software (4º Período)  
 > **Autora:** Maria Letícia de Sousa Barboza
 
+<div align="center">
+  <a href="https://study-hub-flame-zeta.vercel.app" target="_blank">
+    <img src="https://img.shields.io/badge/🚀_Acessar_Site_ao_Vivo-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Site ao Vivo" />
+  </a>
+  <a href="https://github.com/omeIets/StudyHub" target="_blank">
+    <img src="https://img.shields.io/badge/💻_Ver_Código_Fonte-181717?style=for-the-badge&logo=github&logoColor=white" alt="Repositório GitHub" />
+  </a>
+</div>
+<br>
+
 ---
 
 ## 📖 Sobre o Projeto
