@@ -25,7 +25,7 @@
 
 ## 📖 Sobre o Projeto
 
-**StudyHub** é uma aplicação web desenvolvida como projeto individual da disciplina de Desenvolvimento Web. O objetivo é fornecer uma plataforma simples e eficiente para estudantes organizarem suas rotinas de estudo, registrarem o tempo dedicado a cada tarefa e visualizarem seu progresso através de estatísticas detalhadas.
+**LetsStudy** é uma aplicação web desenvolvida como projeto individual da disciplina de Desenvolvimento Web. O objetivo é fornecer uma plataforma simples e eficiente para estudantes organizarem suas rotinas de estudo, registrarem o tempo dedicado a cada tarefa e visualizarem seu progresso através de estatísticas detalhadas.
 
 A aplicação consome a API do **Supabase** para autenticação de usuários e persistência de dados, oferecendo uma experiência completa de front-end integrada a um back-end serverless.
 
