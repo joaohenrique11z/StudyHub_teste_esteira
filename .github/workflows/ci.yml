@@ -10,7 +10,7 @@ jobs:
   security:
     uses: joaohenrique11z/teste_esteira/.github/workflows/pipeline.yml@v1
     with:
-      project_name: 'meu-projeto'          # Nome usado no DefectDojo
+      project_name: 'study_hub'          # Nome usado no DefectDojo
       stack_type: 'node'                    # Opções: node, dotnet, python, java, cpp, go, rust
       run_dast: true                        # true = executa OWASP ZAP
       dast_target_url: 'https://study-hub-flame-zeta.vercel.app'  # Obrigatório se run_dast: true
